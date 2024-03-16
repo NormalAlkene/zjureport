@@ -2,8 +2,9 @@
 \ProvidesClass{zjureport}
 
 \DeclareOption{infohdr}{\def\@infohdr}
-\DeclareOption{headtype1}{\def\headtype 1}
-\DeclareOption{headtype2}{\def\headtype 2}
+\DeclareOption*{%
+    \PassOptionsToClass{\CurrentOption}{ctexart}%
+}
 \ProcessOptions\relax
 
 \LoadClass{ctexart}
@@ -35,7 +36,6 @@
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
-\pagestyle{plain}
 
 \renewcommand{\maketitle}{{
     \noindent
@@ -52,7 +52,7 @@
     \ifx\@infohdr\undefined \else
     \hspace{.08\textwidth}
     \parbox[b]{.1\textwidth}{
-		\renewcommand{\arraystretch}{1.25}
+		\renewcommand{\arraystretch}{1.5}
 		\begin{tabular}{l c}
 			专业： & \@major \\
 			\cline{2-2}
@@ -104,6 +104,7 @@
 }
 
 \newcommand{\makeinfo}{
+    \noindent
     \begin{table}[h]
         \begin{tabularx}{\textwidth}{c Y c c c c}
             实验名称：& \@expname & 姓名： & \@author & 学号： & \@stuid\\
@@ -112,11 +113,12 @@
     \end{table}
 }
 
+\setmonofont{Consolas}
 
 \lstset{
     basicstyle          =   \linespread{0.85}\ttfamily,
     keywordstyle        =   \bfseries\color{blue},
-    stringstyle         =   \bfseries\color{Magenta!90!black},
+    stringstyle         =   \color{Magenta!90!black},
     commentstyle        =   \color{LimeGreen},
     breaklines          =   true,   
     columns             =   flexible,
@@ -136,3 +138,4 @@
     morekeywords={size_t}
 }
 
+\pagestyle{plain}
