@@ -15,16 +15,29 @@
 
 \ctexset{
 	section = {
-		format = {\Large\sffamily\bfseries},
+		format = {\LARGE\sffamily\bfseries},
         name = {,、},
         number = {\chinese{section}},
-        aftername = \hspace{0.1em}
+        aftername = \hspace{0.3em}
+	},
+	subsection = {
+		format = {\Large\sffamily\bfseries},
+        name = {（,）},
+        number = {\chinese{subsection}},
+        aftername = \hspace{0.3em},
+	},
+	subsubsection = {
+		format = {\large\sffamily\bfseries},
+        name = {,.},
+        number = {\arabic{subsubsection}},
+        aftername = \hspace{0.35em}
 	},
 	paragraph = {
 		format = {\large\bfseries}
 	}
 }
 
+% Parameters
 \newcommand\course[1]{\def\@course{#1}}
 \newcommand\expname[1]{\def\@expname{#1}}
 \newcommand\exptype[1]{\def\@exptype{#1}}
