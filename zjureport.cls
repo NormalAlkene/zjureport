@@ -51,12 +51,13 @@
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
 \renewcommand{\maketitle}{{%
-    \noindent\centering%
+    \vspace*{12pt}
+    \par\noindent\centering
     \parbox[b]{.24\textwidth}{%
         \includegraphics[width=.24\textwidth]{zju.pdf}
     }
     \quad
-    \parbox[b]{.25\textwidth}{%
+    \parbox[b]{.24\textwidth}{%
         \Huge\textsf{\textbf{实验报告}}
         \smallskip
     }
@@ -73,7 +74,7 @@
         \fancyhead[R]{%
             \let\orig@arraystretch\arraystretch
             \renewcommand*{\arraystretch}{1.5}
-            \begin{tabular}[t]{l c}
+            \begin{tabular}[b]{l c}
                 \ifdef{\@major}{%
                     专业： & \@major \\
                     \cline{2-2}
@@ -114,10 +115,12 @@
             \cline{2-4}\cline{6-6}
         }
     \end{tabularx}
-    \begin{tabularx}{\textwidth}{r Y r Y r Y r Y}
-        专业： & \@major & 姓名： & \@author & 学号： & \@stuid & 日期： & \@date \\
-        \cline{2-2}\cline{4-4}\cline{6-6}\cline{8-8}
-    \end{tabularx}
+    \ifundef{\opt@infohdr}{
+        \begin{tabularx}{\textwidth}{r Y r Y r Y r Y}
+            专业： & \@major & 姓名： & \@author & 学号： & \@stuid & 日期： & \@date \\
+            \cline{2-2}\cline{4-4}\cline{6-6}\cline{8-8}
+        \end{tabularx}
+    }{}
     \par\bigskip
 }
 
