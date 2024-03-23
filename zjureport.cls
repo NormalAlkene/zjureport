@@ -8,7 +8,7 @@
 \ProcessOptions\relax
 
 \LoadClass{ctexart}
-\RequirePackage{geometry, graphicx, tabularx, listings, fontspec}
+\RequirePackage{geometry, graphicx, tabularx, listings, fontspec, fancyhdr}
 \RequirePackage{etoolbox}
 \RequirePackage[svgnames]{xcolor}
 
@@ -38,7 +38,6 @@
 	}
 }
 
-% Parameters
 \newcommand*\course[1]{\def\@course{#1}}
 \newcommand*\expname[1]{\def\@expname{#1}}
 \newcommand*\exptype[1]{\def\@exptype{#1}}
@@ -51,40 +50,55 @@
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
-\renewcommand{\maketitle}{%
+\renewcommand{\maketitle}{{%
     \noindent\centering%
-    \parbox[b]{.25\textwidth}{%
-        \includegraphics[width=.25\textwidth]{zju.pdf}
+    \parbox[b]{.24\textwidth}{%
+        \includegraphics[width=.24\textwidth]{zju.pdf}
     }
     \quad
     \parbox[b]{.25\textwidth}{%
         \Huge\textsf{\textbf{实验报告}}
         \smallskip
     }
-    \ifdef{\opt@infohdr}{%
-        \hspace{.08\textwidth}
-        \parbox[b]{.1\textwidth}{%
-            \let\orig@arraystretch{\arraystretch}
-            \renewcommand*{arraystretch}{1.5}
-            \begin{tabular}{l c}
-                专业： & \@major \\
-                \cline{2-2}
-                姓名： & \@author \\
-                \cline{2-2}
-                学号： & \@stuid \\
-                \cline{2-2}
-                日期： & \@date \\
-                \cline{2-2}
-                \ifdef{\@location}{%
-                地点： & \@location \\
-                \cline{2-2}
-                }{}
-            \end{tabular}
-            \let\arraystretch{\orig@arraystretch}
-        }
-    }{}
     \par\bigskip
-}
+    \ifdef{\opt@infohdr}{%
+        \thispagestyle{titlepage}
+    }{}
+}}
+
+\ifdef{\opt@infohdr}{%
+    \renewcommand{\headrulewidth}{0pt}
+    \fancypagestyle{titlepage}{%
+        \fancyhead{}
+        \fancyhead[R]{%
+            \let\orig@arraystretch\arraystretch
+            \renewcommand*{\arraystretch}{1.5}
+            \begin{tabular}[t]{l c}
+                \ifdef{\@major}{%
+                    专业： & \@major \\
+                    \cline{2-2}
+                }{}
+                \ifdef{\@author}{%
+                    姓名： & \@author \\
+                    \cline{2-2}
+                }{}
+                \ifdef{\@stuid}{%
+                    学号： & \@stuid \\
+                    \cline{2-2}
+                }{}
+                \ifdef{\@date}{%
+                    日期： & \@date \\
+                    \cline{2-2}
+                }{}
+                \ifdef{\@location}{%
+                    地点： & \@location \\
+                    \cline{2-2}
+                }{}
+                \end{tabular}
+            \let\arraystretch\orig@arraystretch
+        }
+    }
+}{}
 
 % TODO: more customizable?
 \newcommand{\makeinfo}{%
@@ -111,10 +125,11 @@
 \let\orig@tableofcontents\tableofcontents
 \renewcommand{\tableofcontents}{%
     \IfFileExists{\jobname.toc}{%
-        \noindent%
-        \begin{tabularx}{\textwidth}{X X}
+        \par\noindent%
+        \begin{tabularx}{\textwidth}{X l}
             \immediate\input{\jobname.toc}
         \end{tabularx}
+        \par
     }{}
     \def\flag@writetoc{\relax}
     \newwrite\file@toc
