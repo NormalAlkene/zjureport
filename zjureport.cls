@@ -154,11 +154,11 @@
     }{}
 }
 
-\setmonofont{Consolas}
-
+\setmonofont{Noto Sans Mono}
 \lstset{%
     basicstyle          =   \linespread{0.85}\ttfamily,
-    keywordstyle        =   \bfseries\color{blue},
+    keywordstyle        =   [0]\bfseries\color{blue},
+    keywordstyle        =   [1]\bfseries\color{magenta},
     stringstyle         =   \color{Magenta!90!black},
     commentstyle        =   \color{LimeGreen},
     breaklines          =   true,   
@@ -177,6 +177,17 @@
 \lstdefinestyle{CPP}{%
     language = C++,
     morekeywords={size_t}
+}
+
+\lstdefinestyle{plain}{%
+    numbers = none
+}
+
+\lstdefinelanguage[8051]{Assembler}{%
+    keywords = [0]{ACALL, ADD, ADDC, AJMP, ANL, CJNE, CLR, CPL, DA, DEC, DIV, DJNZ, INC, JB, JBC, JC, JMP, JNB, JNC, JNZ, JZ, LCALL, LJMP, MOV, MOVC, MOVC, MOVX, MOVX, MUL, NOP, ORL, POP, PUSH, RET, RETI, RL, RLC, RR, RRC, SETB, SJMP, SUBB, SWAP, XCH, XCHD, XRL},
+    keywords = [1]{ORG, DB, DW, DS, EQU, DATA, BIT, END},
+    comment = [l]{;},
+    sensitive = false
 }
 
 \pagestyle{plain}
