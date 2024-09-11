@@ -124,9 +124,19 @@
     \par\bigskip
 }
 
-% Redefinition of the tableofcontents
-\let\orig@tableofcontents\tableofcontents
-\renewcommand{\tableofcontents}{%
+\newpagestyle{coverpage}{%
+}
+
+\newcommand{\makecoverpage}{%
+    \begin{titlepage}
+        
+    \end{titlepage}
+    
+    \includegraphics{}
+    \clearpage
+}
+
+\newcommand{\simpletoc}{%
     \IfFileExists{\jobname.toc}{%
         \par\noindent%
         \begin{tabularx}{\textwidth}{X l}
@@ -141,6 +151,12 @@
         \immediate\closeout\file@toc
     }
 }
+
+\let\complextoc\tableofcontents
+
+% Redefinition of the tableofcontents
+\let\orig@tableofcontents\tableofcontents
+\renewcommand{\tableofcontents}{\simpletoc}
 
 \let\orig@section\section
 \renewcommand{\section}[1]{%
