@@ -1,3 +1,4 @@
+% vim: foldmethod=marker
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{zjureport}
 
@@ -14,6 +15,9 @@
 
 \geometry{a4paper, scale=0.8}
 
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+% {{{ CTEX settings
 \ctexset{
 	section = {
 		format = {\LARGE\sffamily\bfseries},
@@ -37,7 +41,9 @@
 		format = {\large\bfseries}
 	}
 }
+% }}}
 
+% {{{ Info table settings
 % Deprecated info setting commands
 \newcommand*\course[1]{\def\vcourse{#1}}
 \newcommand*\expname[1]{\def\vexpname{#1}}
@@ -57,25 +63,6 @@
     \setkeys{reportinfo}{#1}%
 }
 \define@key{reportinfo}{author}{\def\field@name}
-
-\newcolumntype{Y}{>{\centering\arraybackslash}X}
-
-\renewcommand{\maketitle}{{%
-    \vspace*{12pt}
-    \par\noindent\centering
-    \parbox[b]{.24\textwidth}{%
-        \includegraphics[width=.24\textwidth]{zju.pdf}
-    }
-    \quad
-    \parbox[b]{.24\textwidth}{%
-        \Huge\textsf{\textbf{实验报告}}
-        \smallskip
-    }
-    \par\bigskip
-    \ifdef{\opt@infohdr}{%
-        \thispagestyle{titlepage}
-    }{}
-}}
 
 \ifdef{\opt@infohdr}{%
     \renewcommand{\headrulewidth}{0pt}
@@ -134,8 +121,25 @@
     \par\bigskip
 }
 
-%\newpagestyle{coverpage}{%
-%}
+% }}}
+
+% {{{ Cover page and title
+\renewcommand{\maketitle}{{%
+    \vspace*{12pt}
+    \par\noindent\centering
+    \parbox[b]{.24\textwidth}{%
+        \includegraphics[width=.24\textwidth]{zju.pdf}
+    }
+    \quad
+    \parbox[b]{.24\textwidth}{%
+        \Huge\textsf{\textbf{实验报告}}
+        \smallskip
+    }
+    \par\bigskip
+    \ifdef{\opt@infohdr}{%
+        \thispagestyle{titlepage}
+    }{}
+}}
 
 \newcommand{\makecoverpage}{%
     \begin{titlepage}
@@ -188,7 +192,9 @@
         \end{center}
     \end{titlepage}
 }
+% }}}
 
+% {{{ Table of contents
 \newcommand{\simpletoc}{%
     \IfFileExists{\jobname.toc}{%
         \par\noindent%
@@ -222,7 +228,9 @@
         }
     }{}
 }
+% }}}
 
+% {{{ Listing settings
 \setmonofont{Noto Sans Mono}
 \lstset{%
     basicstyle          =   \linespread{0.85}\ttfamily,
@@ -258,5 +266,6 @@
     comment = [l]{;},
     sensitive = false
 }
+% }}}
 
 \pagestyle{plain}
