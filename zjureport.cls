@@ -8,7 +8,7 @@
 \ProcessOptions\relax
 
 \LoadClass{ctexart}
-\RequirePackage{geometry, graphicx, tabularx, listings, fontspec, fancyhdr, titlesec, ragged2e}
+\RequirePackage{geometry, graphicx, tabularx, listings, fontspec, fancyhdr, xkeyval, titlesec}
 \RequirePackage{etoolbox}
 \RequirePackage[svgnames]{xcolor}
 
@@ -38,16 +38,25 @@
 	}
 }
 
-\newcommand*\course[1]{\def\@course{#1}}
-\newcommand*\expname[1]{\def\@expname{#1}}
-\newcommand*\exptype[1]{\def\@exptype{#1}}
-\newcommand*\coauthor[1]{\def\@coauthor{#1}}
-\newcommand*\instructor[1]{\def\@instructor{#1}}
-\newcommand*\teacher[1]{\def\@instructor{#1}}
-\newcommand*\stuid[1]{\def\@stuid{#1}}
-\newcommand*\major[1]{\def\@major{#1}}
-\newcommand*\location[1]{\def\@location{#1}}
-\renewcommand*\date[1]{\def\@date{#1}}
+% Deprecated info setting commands
+\newcommand*\course[1]{\def\vcourse{#1}}
+\newcommand*\expname[1]{\def\vexpname{#1}}
+\newcommand*\exptype[1]{\def\vexptype{#1}}
+\newcommand*\coauthor[1]{\def\vcoauthor{#1}}
+\newcommand*\instructor[1]{\def\vinstructor{#1}}
+\newcommand*\stuid[1]{\def\vstuid{#1}}
+\newcommand*\major[1]{\def\vmajor{#1}}
+\newcommand*\location[1]{\def\vlocation{#1}}
+\renewcommand*\date[1]{\def\vdate{#1}}
+
+% Predefined table cells
+% Todo
+\newcommand*\infotabcellrAcA{}
+
+\newcommand{\reportinfo}[1]{%
+    \setkeys{reportinfo}{#1}%
+}
+\define@key{reportinfo}{author}{\def\field@name}
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
