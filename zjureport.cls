@@ -8,7 +8,7 @@
 \ProcessOptions\relax
 
 \LoadClass{ctexart}
-\RequirePackage{geometry, graphicx, tabularx, listings, fontspec, fancyhdr}
+\RequirePackage{geometry, graphicx, tabularx, listings, fontspec, fancyhdr, titlesec, ragged2e}
 \RequirePackage{etoolbox}
 \RequirePackage[svgnames]{xcolor}
 
@@ -42,7 +42,8 @@
 \newcommand*\expname[1]{\def\@expname{#1}}
 \newcommand*\exptype[1]{\def\@exptype{#1}}
 \newcommand*\coauthor[1]{\def\@coauthor{#1}}
-\newcommand*\teacher[1]{\def\@teacher{#1}}
+\newcommand*\instructor[1]{\def\@instructor{#1}}
+\newcommand*\teacher[1]{\def\@instructor{#1}}
 \newcommand*\stuid[1]{\def\@stuid{#1}}
 \newcommand*\major[1]{\def\@major{#1}}
 \newcommand*\location[1]{\def\@location{#1}}
@@ -105,7 +106,7 @@
 \newcommand{\makeinfo}{%
     \par\noindent
     \begin{tabularx}{\textwidth}{r Y r c r c}
-        课程名称： & \@course & 指导老师： & \@teacher & 成绩： & \\
+        课程名称： & \@course & 指导老师： & \@instructor & 成绩： & \\
         \cline{2-2}\cline{4-4}\cline{6-6}
         \ifdef{\@coauthor}{%
             实验名称： & \@expname & 实验类型： & \@exptype & 同组学生姓名： & \@coauthor \\
@@ -124,16 +125,59 @@
     \par\bigskip
 }
 
-\newpagestyle{coverpage}{%
-}
+%\newpagestyle{coverpage}{%
+%}
 
 \newcommand{\makecoverpage}{%
     \begin{titlepage}
-        
+        \begin{center}
+            \def\opt@coverpage{}
+            \vspace*{2cm}
+
+            \noindent\includegraphics[width = .5\textwidth]{zju.pdf}
+
+            \vspace*{1cm}
+
+            \noindent\parbox[b]{.6\textwidth}{%
+                \noindent\Huge\textbf{\textsf{本\hspace{\fill}科\hspace{\fill}生\hspace{\fill}实\hspace{\fill}验\hspace{\fill}报\hspace{\fill}告}}
+            }
+            \vspace*{1cm}
+
+            \noindent\includegraphics[width = .3\textwidth]{zju-logo.pdf}
+
+            \vspace*{1cm}
+
+            \let\orig@arraystretch\arraystretch
+            \renewcommand*{\arraystretch}{2.3}
+            \begin{tabular}[b]{l c}
+                \ifdef{\@major}{%
+                    \Large 项目： & \Large \@expname \\
+                    \cline{2-2}
+                }{}
+                \ifdef{\@major}{%
+                    \Large 专业： & \Large \@major \\
+                    \cline{2-2}
+                }{}
+                \ifdef{\@author}{%
+                    \Large 姓名： & \Large \@author \\
+                    \cline{2-2}
+                }{}
+                \ifdef{\@stuid}{%
+                    \Large 学号： & \Large \@stuid \\
+                    \cline{2-2}
+                }{}
+                \ifdef{\@date}{%
+                    \Large 日期： & \Large \@date \\
+                    \cline{2-2}
+                }{}
+                \ifdef{\@location}{%
+                    \Large 地点： & \Large \@location \\
+                    \cline{2-2}
+                }{}
+                \end{tabular}
+            \let\arraystretch\orig@arraystretch
+        \end{center}
     \end{titlepage}
-    
-    \includegraphics{}
-    \clearpage
 }
 
 \newcommand{\simpletoc}{%
