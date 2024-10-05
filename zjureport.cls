@@ -248,12 +248,6 @@
     numbers = none
 }
 
-\lstdefinelanguage[8051]{Assembler}{%
-    keywords = [0]{ACALL, ADD, ADDC, AJMP, ANL, CJNE, CLR, CPL, DA, DEC, DIV, DJNZ, INC, JB, JBC, JC, JMP, JNB, JNC, JNZ, JZ, LCALL, LJMP, MOV, MOVC, MOVC, MOVX, MOVX, MUL, NOP, ORL, POP, PUSH, RET, RETI, RL, RLC, RR, RRC, SETB, SJMP, SUBB, SWAP, XCH, XCHD, XRL},
-    keywords = [1]{ORG, DB, DW, DS, EQU, DATA, BIT, END},
-    comment = [l]{;},
-    sensitive = false
-}
 % }}}
 
 \pagestyle{plain}
