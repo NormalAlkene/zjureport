@@ -45,70 +45,58 @@
 
 % {{{ Info table settings
 % Deprecated info setting commands
-\newcommand*\course[1]{\def\vcourse{#1}}
-\newcommand*\expname[1]{\def\vexpname{#1}}
-\newcommand*\exptype[1]{\def\vexptype{#1}}
-\newcommand*\coauthor[1]{\def\vcoauthor{#1}}
-\newcommand*\instructor[1]{\def\vinstructor{#1}}
-\newcommand*\stuid[1]{\def\vstuid{#1}}
-\newcommand*\major[1]{\def\vmajor{#1}}
-\newcommand*\location[1]{\def\vlocation{#1}}
-\renewcommand*\date[1]{\def\vdate{#1}}
-
-% Predefined table cells
-% Todo
-\newcommand*\infotabcellrAcA{}
-
-\newcommand{\reportinfo}[1]{%
-    \setkeys{reportinfo}{#1}%
-}
-\define@key{reportinfo}{author}{\def\field@name}
+\newcommand*{\@course}{}
+\newcommand*{\@expname}{}
+\newcommand*{\@exptype}{}
+\newcommand*{\@coauthor}{}
+\newcommand*{\@instructor}{}
+\newcommand*{\@stuid}{}
+\newcommand*{\@major}{}
+\newcommand*{\@location}{}
+\newcommand*{\course}[1]{\renewcommand{\@course}{#1}}
+\newcommand*{\expname}[1]{\renewcommand{\@expname}{#1}}
+\newcommand*{\exptype}[1]{\renewcommand{\@exptype}{#1}}
+\newcommand*{\coauthor}[1]{\renewcommand{\@coauthor}{#1}}
+\newcommand*{\instructor}[1]{\renewcommand{\@instructor}{#1}}
+\newcommand*{\stuid}[1]{\renewcommand{\@stuid}{#1}}
+\newcommand*{\major}[1]{\renewcommand{\@major}{#1}}
+\newcommand*{\location}[1]{\renewcommand{\@location}{#1}}
+\renewcommand*{\date}[1]{\renewcommand{\@date}{#1}}
 
 \ifdef{\opt@infohdr}{%
     \renewcommand{\headrulewidth}{0pt}
-    \fancypagestyle{titlepage}{%
+    \fancypagestyle{firstpage}{%
         \fancyhead{}
         \fancyhead[R]{%
             \let\orig@arraystretch\arraystretch
             \renewcommand*{\arraystretch}{1.5}
             \begin{tabular}[b]{l c}
-                \ifdef{\@major}{%
-                    专业： & \@major \\
-                    \cline{2-2}
-                }{}
-                \ifdef{\@author}{%
-                    姓名： & \@author \\
-                    \cline{2-2}
-                }{}
-                \ifdef{\@stuid}{%
-                    学号： & \@stuid \\
-                    \cline{2-2}
-                }{}
-                \ifdef{\@date}{%
-                    日期： & \@date \\
-                    \cline{2-2}
-                }{}
-                \ifdef{\@location}{%
-                    地点： & \@location \\
-                    \cline{2-2}
-                }{}
-                \end{tabular}
+                专业： & \@major \\
+                \cline{2-2}
+                姓名： & \@author \\
+                \cline{2-2}
+                学号： & \@stuid \\
+                \cline{2-2}
+                日期： & \@date \\
+                \cline{2-2}
+                地点： & \@location \\
+                \cline{2-2}
+            \end{tabular}
             \let\arraystretch\orig@arraystretch
         }
     }
 }{}
 
-% TODO: more customizable?
 \newcommand{\makeinfo}{%
     \par\noindent
     \begin{tabularx}{\textwidth}{r Y r c r c}
-        课程名称： & \@course & 指导老师： & \@instructor & 成绩： & \\
+        课\hspace{\fill}程\hspace{\fill}名\hspace{\fill}称： & \@course & 指\hspace{\fill}导\hspace{\fill}老\hspace{\fill}师： & \@instructor & 成\hspace{\fill}绩： & \\
         \cline{2-2}\cline{4-4}\cline{6-6}
-        \ifdef{\@coauthor}{%
-            实验名称： & \@expname & 实验类型： & \@exptype & 同组学生姓名： & \@coauthor \\
+        \expandafter\notblank\expandafter{\@coauthor}{%
+            实\hspace{\fill}验\hspace{\fill}名\hspace{\fill}称： & \@expname & 实\hspace{\fill}验\hspace{\fill}类\hspace{\fill}型： & \@exptype & 同\hspace{\fill}组\hspace{\fill}学\hspace{\fill}生\hspace{\fill}姓\hspace{\fill}名： & \@coauthor \\
             \cline{2-2}\cline{4-4}\cline{6-6}
         }{%
-            实验名称： & \multicolumn{3}{c}{\@expname} & 实验类型： & \@exptype \\
+            实\hspace{\fill}验\hspace{\fill}名\hspace{\fill}称： & \multicolumn{3}{c}{\@expname} & 实\hspace{\fill}验\hspace{\fill}类\hspace{\fill}型： & \@exptype \\
             \cline{2-4}\cline{6-6}
         }
     \end{tabularx}
@@ -137,7 +125,7 @@
     }
     \par\bigskip
     \ifdef{\opt@infohdr}{%
-        \thispagestyle{titlepage}
+        \thispagestyle{firstpage}
     }{}
 }}
 
