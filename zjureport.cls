@@ -52,6 +52,7 @@
 \newcommand*{\@instructor}{}
 \newcommand*{\@stuid}{}
 \newcommand*{\@major}{}
+\newcommand*{\@college}{}
 \newcommand*{\@location}{}
 \newcommand*{\course}[1]{\renewcommand{\@course}{#1}}
 \newcommand*{\expname}[1]{\renewcommand{\@expname}{#1}}
@@ -60,6 +61,7 @@
 \newcommand*{\instructor}[1]{\renewcommand{\@instructor}{#1}}
 \newcommand*{\stuid}[1]{\renewcommand{\@stuid}{#1}}
 \newcommand*{\major}[1]{\renewcommand{\@major}{#1}}
+\newcommand*{\college}[1]{\renewcommand{\@college}{#1}}
 \newcommand*{\location}[1]{\renewcommand{\@location}{#1}}
 \renewcommand*{\date}[1]{\renewcommand{\@date}{#1}}
 
@@ -151,28 +153,36 @@
             \let\orig@arraystretch\arraystretch
             \renewcommand*{\arraystretch}{2.3}
             \begin{tabular}[b]{l c}
-                \ifdef{\@major}{%
-                    \Large 项目： & \Large \@expname \\
+                \expandafter\notblank\expandafter{\@major}{%
+                    \Large 实\hspace{\fill}验\hspace{\fill}名\hspace{\fill}称： & \Large \@expname \\
                     \cline{2-2}
                 }{}
-                \ifdef{\@major}{%
-                    \Large 专业： & \Large \@major \\
+                \expandafter\notblank\expandafter{\@major}{%
+                    \Large 学\hspace{\fill}院： & \Large \@college \\
                     \cline{2-2}
                 }{}
-                \ifdef{\@author}{%
-                    \Large 姓名： & \Large \@author \\
+                \expandafter\notblank\expandafter{\@major}{%
+                    \Large 专\hspace{\fill}业： & \Large \@major \\
                     \cline{2-2}
                 }{}
-                \ifdef{\@stuid}{%
-                    \Large 学号： & \Large \@stuid \\
+                \expandafter\notblank\expandafter{\@author}{%
+                    \Large 姓\hspace{\fill}名： & \Large \@author \\
                     \cline{2-2}
                 }{}
-                \ifdef{\@date}{%
-                    \Large 日期： & \Large \@date \\
+                \expandafter\notblank\expandafter{\@stuid}{%
+                    \Large 学\hspace{\fill}号： & \Large \@stuid \\
                     \cline{2-2}
                 }{}
-                \ifdef{\@location}{%
-                    \Large 地点： & \Large \@location \\
+                \expandafter\notblank\expandafter{\@instructor}{%
+                    \Large 指\hspace{\fill}导\hspace{\fill}教\hspace{\fill}师： & \Large \@instructor \\
+                    \cline{2-2}
+                }{}
+                \expandafter\notblank\expandafter{\@date}{%
+                    \Large 日\hspace{\fill}期： & \Large \@date \\
+                    \cline{2-2}
+                }{}
+                \expandafter\notblank\expandafter{\@location}{%
+                    \Large 地\hspace{\fill}点： & \Large \@location \\
                     \cline{2-2}
                 }{}
                 \end{tabular}
